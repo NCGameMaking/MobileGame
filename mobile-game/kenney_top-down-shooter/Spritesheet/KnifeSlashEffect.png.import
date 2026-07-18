@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc4ypjx2be3w7"
-path="res://.godot/imported/tilesheet_complete.png-cb292c31130bd6b31bc3faef55eb12f8.ctex"
+uid="uid://v6h6utueejs4"
+path="res://.godot/imported/KnifeSlashEffect.png-bda4f2fbd810dcf5e59dcc5da9c40b09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kenney_top-down-shooter/Tilesheet/tilesheet_complete.png"
-dest_files=["res://.godot/imported/tilesheet_complete.png-cb292c31130bd6b31bc3faef55eb12f8.ctex"]
+source_file="res://kenney_top-down-shooter/Spritesheet/KnifeSlashEffect.png"
+dest_files=["res://.godot/imported/KnifeSlashEffect.png-bda4f2fbd810dcf5e59dcc5da9c40b09.ctex"]
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

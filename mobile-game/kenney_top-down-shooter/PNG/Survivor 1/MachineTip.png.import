@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc4ypjx2be3w7"
-path="res://.godot/imported/tilesheet_complete.png-cb292c31130bd6b31bc3faef55eb12f8.ctex"
+uid="uid://5guuveky1fwv"
+path="res://.godot/imported/MachineTip.png-514bd2414274967f0ed60ba4139e6867.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kenney_top-down-shooter/Tilesheet/tilesheet_complete.png"
-dest_files=["res://.godot/imported/tilesheet_complete.png-cb292c31130bd6b31bc3faef55eb12f8.ctex"]
+source_file="res://kenney_top-down-shooter/PNG/Survivor 1/MachineTip.png"
+dest_files=["res://.godot/imported/MachineTip.png-514bd2414274967f0ed60ba4139e6867.ctex"]
 
 [params]
 
-compress/mode=1
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
