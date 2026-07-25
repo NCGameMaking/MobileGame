@@ -1,0 +1,422 @@
+[gd_scene format=4 uid="uid://l5bpkns63rq0"]
+
+[ext_resource type="TileSet" uid="uid://b6r6vin7nyhgv" path="res://map_tileset.tres" id="1_c3iuu"]
+[ext_resource type="Texture2D" uid="uid://baeu6e7osbi5v" path="res://kenney_top-down-shooter/PNG/Tiles/tile_519.png" id="2_omdvk"]
+[ext_resource type="Texture2D" uid="uid://dfdsb7mmrgbo1" path="res://kenney_top-down-shooter/PNG/bk_cars1.a (3).png" id="3_42flm"]
+[ext_resource type="Texture2D" uid="uid://kww7qv7oycao" path="res://kenney_top-down-shooter/PNG/Tiles/Skidmarks2.png" id="3_pthuy"]
+[ext_resource type="Texture2D" uid="uid://5ov6xi3nghue" path="res://kenney_top-down-shooter/PNG/Tiles/tile_236.png" id="4_0c0jg"]
+[ext_resource type="Texture2D" uid="uid://b1ns1dhh1c5ns" path="res://kenney_top-down-shooter/PNG/Tiles/tile_479.png" id="5_4h6k1"]
+[ext_resource type="Texture2D" uid="uid://bfyk3c4dxffuq" path="res://kenney_top-down-shooter/PNG/Tiles/Skidmarks.png" id="6_2wpf5"]
+
+[sub_resource type="Animation" id="Animation_4h6k1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HazardLights:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_0c0jg"]
+resource_name = "blinking"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HazardLights:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4h6k1"]
+_data = {
+&"RESET": SubResource("Animation_4h6k1"),
+&"blinking": SubResource("Animation_0c0jg")
+}
+
+[sub_resource type="QuadMesh" id="QuadMesh_42flm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pthuy"]
+size = Vector2(45.84189, 91.58117)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oryxb"]
+size = Vector2(46.963123, 98.60251)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gi3qg"]
+size = Vector2(42.552834, 86.0349)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ik8ov"]
+size = Vector2(47.004063, 99.36922)
+
+[node name="Chunk5" type="Node2D" unique_id=2093451203]
+
+[node name="BaseLayer" type="TileMapLayer" parent="." unique_id=826481096]
+tile_map_data = PackedByteArray("AAAQABAAAAAAAAAAAAAQAA8AAAADAAAAAAAQAA4AAAAAAAAAAAAQAA0AAAAAAAAAAAAQAAwAAAACAAAAAAAQAAsAAAACAAAAAAAQAAoAAAADAAAAAAAQAAkAAAADAAAAAAAQAAgAAAADAAAAAAAQAAcAAAADAAAAAAAQAAYAAAADAAAAAAAQAAUAAAADAAAAAAAQAAQAAAADAAAAAAAQAAMAAAAAAAAAAAAQAAIAAAAEAAIAAAAQAAEAAAAEAAEAAAAQAAAAAAAAAAAAAAAPAAAAAAACAAAAAAAOAAAAAAABAAAAAAANAAAAAAACAAAAAAAMAAAAAAABAAAAAAALAAAAAAACAAAAAAAKABAAAAAAAAAAAAAKAAAAAAABAAAAAAAJABAAAAACAAAAAAAJAAAAAAACAAAAAAAIABAAAAABAAAAAAAIAAAAAAABAAAAAAAHABAAAAAAAAAAAAAHAAAAAAACAAAAAAAGABAAAAACAAAAAAAGAAAAAAABAAAAAAAFABAAAAABAAAAAAAFAAAAAAACAAAAAAAEABAAAAAAAAAAAAAEAAAAAAABAAAAAAADABAAAAADAAAAAAADAAAAAAACAAAAAAACABAAAAACAAAAAAACAAAAAAABAAAAAAABABAAAAABAAAAAAABAAAAAAABAAAAAAAAABAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAACAAEAAAAAAAEAAAACAAIAAAAAAAAAAAAAAAAAAAALABAAAAAAAAAAAAAMABAAAAAAAAAAAAANABAAAAABAAAAAAAOABAAAAACAAAAAAAPABAAAAADAAAAAAADAAsAAAALAAQAAAACAAsAAAAJAAQAAAACAAwAAAALAAUAAAACAA0AAAALAAUAAAAEAAsAAAALAAQAAAAFAAoAAAAJAAQAAAAGAAoAAAALAAQAAAAHAAoAAAALAAQAAAAIAAoAAAAOAAQAAAALAAoAAAAPAAUAAAAFAAsAAAANAAUAAAAMAAoAAAALAAQAAAANAAoAAAALAAQAAAAGAAsAAAAOAAEAAAAHAAsAAAAPAAEAAAAIAAsAAAAQAAEAAAAJAAsAAAARAAEAAAAKAAsAAAASAAEAAAALAAsAAAATAAEAAAAGAAwAAAAOAAEAAAAHAAwAAAAPAAEAAAAIAAwAAAAQAAEAAAAJAAwAAAARAAEAAAAKAAwAAAASAAEAAAALAAwAAAATAAEAAAAGAA0AAAAOAAEAAAAHAA0AAAAPAAEAAAAIAA0AAAAQAAEAAAAJAA0AAAARAAEAAAAKAA0AAAASAAEAAAALAA0AAAATAAEAAAADAAwAAAAQAAEAAAAEAAwAAAARAAEAAAAFAAwAAAAPAAQAAAADAA0AAAAQAAEAAAAEAA0AAAARAAEAAAAFAA0AAAASAAEAAAAMAAsAAAAQAAEAAAANAAsAAAARAAEAAAAMAAwAAAAQAAEAAAANAAwAAAARAAEAAAAMAA0AAAAQAAEAAAANAA0AAAARAAEAAAABAAEAAAAEAAEAAAABAAIAAAAEAAIAAAABAAMAAAAFAAIAAAABAAQAAAACAA8AAAABAAUAAAACAA8AAAABAAYAAAACAA8AAAABAAcAAAACAA8AAAABAAgAAAACAA8AAAABAAkAAAACAA8AAAACAAEAAAADAAEAAAACAAIAAAADAAIAAAACAAMAAAACAAIAAAACAAQAAAAJAAAAAAACAAUAAAAJAAAAAAACAAYAAAAJAAAAAAACAAcAAAAJAAAAAAACAAgAAAAJAAAAAAACAAkAAAAJAAAAAAADAAEAAAACAAIAAAADAAIAAAACAAEAAAADAAMAAAAGAAIAAAADAAQAAAAJAAAAAAADAAUAAAAJAAAAAAADAAYAAAAJAAAAAAADAAcAAAAJAAAAAAADAAgAAAAJAAAAAAADAAkAAAAJAAAAAAAEAAEAAAAEAAEAAAAEAAIAAAAEAAIAAAAEAAMAAAAJAAAAAAAEAAQAAAAJAAAAAAAEAAUAAAAJAAAAAAAEAAYAAAAJAAAAAAAEAAcAAAAJAAAAAAAEAAgAAAAJAAAAAAAEAAkAAAAJAAAAAAAFAAEAAAADAAEAAAAFAAIAAAADAAIAAAAFAAMAAAAJAAAAAAAFAAQAAAAJAAAAAAAFAAUAAAAJAAAAAAAFAAYAAAAJAAAAAAAFAAcAAAAJAAAAAAAFAAgAAAAJAAAAAAAFAAkAAAAJAAAAAAAGAAEAAAACAAIAAAAGAAIAAAACAAEAAAAGAAMAAAAJAAAAAAAGAAQAAAAJAAAAAAAGAAUAAAAJAAAAAAAGAAYAAAAJAAAAAAAGAAcAAAAJAAAAAAAGAAgAAAAJAAAAAAAGAAkAAAAJAAAAAAAHAAEAAAAEAAEAAAAHAAIAAAAEAAIAAAAHAAMAAAAJAAAAAAAHAAQAAAAJAAAAAAAHAAUAAAAJAAAAAAAHAAYAAAAJAAAAAAAHAAcAAAAJAAAAAAAHAAgAAAAJAAAAAAAHAAkAAAAJAAAAAAAIAAEAAAADAAEAAAAIAAIAAAADAAIAAAAIAAMAAAAJAAAAAAAIAAQAAAAJAAAAAAAIAAUAAAAJAAAAAAAIAAYAAAAJAAAAAAAIAAcAAAAJAAAAAAAIAAgAAAAJAAAAAAAIAAkAAAAJAAAAAAAJAAEAAAACAAIAAAAJAAIAAAACAAEAAAAJAAMAAAAJAAAAAAAJAAQAAAAJAAAAAAAJAAUAAAAJAAAAAAAJAAYAAAAJAAAAAAAJAAcAAAAJAAAAAAAJAAgAAAAJAAAAAAAJAAkAAAAJAAAAAAAKAAEAAAAEAAEAAAAKAAIAAAAEAAIAAAAKAAMAAAAJAAAAAAAKAAQAAAAJAAAAAAAKAAUAAAAJAAAAAAAKAAYAAAAJAAAAAAAKAAcAAAAJAAAAAAAKAAgAAAAJAAAAAAAKAAkAAAAJAAAAAAALAAEAAAADAAEAAAALAAIAAAADAAIAAAALAAMAAAAJAAAAAAALAAQAAAAJAAAAAAALAAUAAAAJAAAAAAALAAYAAAAJAAAAAAALAAcAAAAJAAAAAAALAAgAAAAJAAAAAAALAAkAAAAJAAAAAAAMAAEAAAACAAIAAAAMAAIAAAACAAEAAAAMAAMAAAAJAAAAAAAMAAQAAAAJAAAAAAAMAAUAAAAJAAAAAAAMAAYAAAAJAAAAAAAMAAcAAAAJAAAAAAAMAAgAAAAJAAAAAAAMAAkAAAAJAAAAAAANAAEAAAAEAAEAAAANAAIAAAAEAAIAAAANAAMAAAAFAAIAAAANAAQAAAAJAAAAAAANAAUAAAAJAAAAAAANAAYAAAAJAAAAAAANAAcAAAAJAAAAAAANAAgAAAAJAAAAAAANAAkAAAAJAAAAAAAOAAEAAAADAAEAAAAOAAIAAAADAAIAAAAOAAMAAAACAAIAAAAOAAQAAAAJAAAAAAAOAAUAAAAJAAAAAAAOAAYAAAAJAAAAAAAOAAcAAAAJAAAAAAAOAAgAAAAJAAAAAAAOAAkAAAAJAAAAAAAPAAEAAAACAAIAAAAPAAIAAAACAAEAAAAPAAMAAAAGAAIAAAAPAAQAAAACAA8AABAPAAUAAAACAA8AABAPAAYAAAACAA8AABAPAAcAAAACAA8AABAPAAgAAAACAA8AABAPAAkAAAACAA8AABABAAoAAAACAA8AAAACAAoAAAAJAAAAAAADAAoAAAAJAAAAAAAEAAoAAAAJAAAAAAABAAsAAAACAA8AAAABAAwAAAACAA8AAAABAA0AAAACAA8AAAABAA4AAAACAA8AAAABAA8AAAAHAAsAAAACAA8AAAAJAAUAAAADAA8AAAALAAQAAAAEAA8AAAALAAQAAAAFAA8AAAANAAQAAAAGAA8AAAAOAAQAAAAHAA8AAAAPAAEAAAAIAA8AAAAQAAEAAAAJAA8AAAARAAEAAAAKAA8AAAASAAEAAAALAA8AAAAPAAUAAAAMAA8AAAALAAQAAAANAA8AAAALAAQAAAAPAA8AAAAKAAUAAAAPAAoAAAAKAAQAAAAPAAsAAAAPAAQAAAAPAAwAAAASAAEAAAAPAA0AAAASAAEAAAAPAA4AAAAOAAUAAAADAA4AAAAQAAEAAAAEAA4AAAARAAEAAAAFAA4AAAAOAAUAAAAGAA4AAAAOAAEAAAAHAA4AAAAPAAEAAAAIAA4AAAAQAAEAAAAJAA4AAAARAAEAAAAKAA4AAAASAAEAAAALAA4AAAATAAEAAAAMAA4AAAAQAAEAAAANAA4AAAARAAEAAAACAA4AAAALAAUAAAAOAAoAAAALAAQAAAAOAA8AAAALAAQAAAAOAAsAAAAQAAEAAAAOAAwAAAAQAAEAAAAOAA0AAAAQAAEAAAAOAA4AAAAQAAEAAAAKAAoAAAAQAAEAAAAJAAoAAAAPAAEAAAA=")
+tile_set = ExtResource("1_c3iuu")
+
+[node name="DoorsWindowsPillars" type="TileMapLayer" parent="." unique_id=300865950]
+modulate = Color(0.73468006, 0.7346798, 0.7346799, 1)
+tile_map_data = PackedByteArray("AAAJAAoAAAADABAAAAAKAAoAAAADABEAAAAFAAcAAAARAAwAAAAMAAcAAAARAAwAAAAFAA0AAAANABEAAFAHAA8AAAAFABMAAAAIAA8AAAAFABMAAAAJAA8AAAAFABMAAAAKAA8AAAAFABMAAAAPAAwAAAAFABIAAAAPAA0AAAAFABIAAAA=")
+tile_set = ExtResource("1_c3iuu")
+
+[node name="OilSpillsShelvesReception" type="TileMapLayer" parent="." unique_id=1787045397]
+modulate = Color(0.73468006, 0.7346798, 0.7346799, 1)
+tile_map_data = PackedByteArray("AAAFAA0AAAANABEAAFAGAAwAAAAUABEAAAAHAAwAAAAWABEAAAAHAA0AAAAXABEAAAAJAAsAAAALABEAAAAJAAwAAAAMABAAAAAJAA0AAAAMABAAAAAJAA4AAAAKABEAAAALAAsAAAALABEAAAALAAwAAAAMABAAAAALAA0AAAAMABAAAAALAA4AAAAKABEAAAANAAsAAAALABEAAAANAAwAAAAMABAAAAANAA0AAAAMABAAAAANAA4AAAAKABEAAAACAAgAAAAWAAsAADAEAAQAAAAWAAsAAHAFAAcAAAARAAwAAAAGAAMAAAAWAAsAAHAGAAcAAAAWAAsAAAAIAAUAAAAWAAsAAFAIAAgAAAAWAAsAACAKAAIAAAAWAAsAADAMAAcAAAARAAwAAAANAAYAAAAWAAsAAHAOAAIAAAAWAAsAACAOAAQAAAAWAAsAAHAOAAkAAAAWAAsAADAFAAQAAAARAAwAAAAMAAQAAAARAAwAAAADAAwAAAAUAAQAAAADAA0AAAAUAAQAAAAEAAwAAAAUAAUAAAADAA4AAAAUAAUAAAA=")
+tile_set = ExtResource("1_c3iuu")
+
+[node name="LitterItems" type="TileMapLayer" parent="." unique_id=747489700]
+modulate = Color(0.73468006, 0.7346798, 0.7346799, 1)
+tile_map_data = PackedByteArray("AAAJAAwAAAATAAkAAAANAA0AAAAYAAgAACALAAwAAAAZAAYAAAAHAA0AAAAZAAUAAAAHAAwAAAAYABIAAAADAAcAAAALABIAAAAEAAcAAAAaAAkAAAAKAAcAAAALABIAAAAKAAgAAAALABIAAAALAAcAAAAaAAkAAAALAAgAAAAaAAkAACACAAQAAAAVAAgAAAADAAgAAAALABIAAAADAAoAAAAVAAoAAAAEAAgAAAAaAAkAACAFAAYAAAAVAAoAAAAGAAMAAAAWAAoAAAAHAAYAAAAWAAkAAAAJAAQAAAAWAAkAAAAJAAYAAAAWAAgAAAAKAAkAAAAUAAgAAAALAAkAAAAWAAoAACAPAAYAAAAWAAoAAEADAAQAAAALABIAAAAEAAQAAAAaAAkAAAADAAUAAAALABIAAAAEAAUAAAAaAAkAACAKAAQAAAALABIAAAALAAQAAAAaAAkAAAAKAAUAAAALABIAAAALAAUAAAAaAAkAACAHAA4AAAAUAAkAAAAMAA4AAAAWAAkAACAGAAsAAAAVAAkAAAAMAAsAAAASAAkAAAAOAA0AAAAVAAoAABADAA0AAAAVAAUAAAADAAwAAAAVAAQAAAAEAAwAAAAVAAQAAAADAA4AAAAXAAgAAAAAAA8AAAAXAAcAAAAAAAoAAAAXAAcAAAALABAAAAAXAAcAAAAQAAcAAAAXAAcAAAAPAAAAAAAXAAcAAAABAAAAAAAXAAcAAAAAAAUAAAAUAAYAAAAQAAsAAAAUAAYAAAAIAAAAAAAUAAYAAAACABAAAAAUAAYAAAAPABAAAAAUAAYAAAAGABAAAAAUAAcAAAAQAA4AAAAUAAcAAAAAAAwAAAAUAAcAAAAAAAcAAAAUAAcAAAAQAAMAAAAUAAcAAAALAAAAAAAUAAcAAAADAAAAAAAUAAcAAAA=")
+tile_set = ExtResource("1_c3iuu")
+
+[node name="BottomWindow" type="PointLight2D" parent="." unique_id=1950575614]
+position = Vector2(575.75, 990)
+scale = Vector2(4.0390625, 1)
+texture = ExtResource("2_omdvk")
+
+[node name="LeftWindow" type="PointLight2D" parent="." unique_id=1564179403]
+position = Vector2(991, 830.00006)
+rotation = -1.5707964
+scale = Vector2(1.9900215, 1)
+texture = ExtResource("2_omdvk")
+
+[node name="Skidmarks" type="Sprite2D" parent="." unique_id=495015147]
+texture_filter = 1
+position = Vector2(542, 318)
+rotation = 2.7502203
+scale = Vector2(2.6080995, 1.7425047)
+texture = ExtResource("6_2wpf5")
+flip_v = true
+
+[node name="Skidmarks3" type="Sprite2D" parent="." unique_id=460118435]
+texture_filter = 1
+position = Vector2(626, 144.99998)
+rotation = 0.05398768
+scale = Vector2(4.107465, 2.2936373)
+texture = ExtResource("3_pthuy")
+
+[node name="Skidmarks4" type="Sprite2D" parent="." unique_id=1479668520]
+texture_filter = 1
+position = Vector2(918.99994, 399)
+rotation = 0.28204644
+scale = Vector2(1.9469892, 2.2936373)
+texture = ExtResource("3_pthuy")
+
+[node name="RedTruck" type="Sprite2D" parent="." unique_id=803249496]
+texture_filter = 1
+position = Vector2(415.00003, 346)
+rotation = -1.8325958
+scale = Vector2(1.665, 1.665)
+texture = ExtResource("3_42flm")
+hframes = 5
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RedTruck" unique_id=94002366]
+libraries/ = SubResource("AnimationLibrary_4h6k1")
+autoplay = &"blinking"
+
+[node name="HazardMeshes" type="Node2D" parent="RedTruck" unique_id=1710472920]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="RedTruck/HazardMeshes" unique_id=559103365]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(-12.4765625, -43.072006)
+scale = Vector2(5.11565, 3.0374258)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="RedTruck/HazardMeshes" unique_id=2134388644]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(12.4888, -43.000305)
+scale = Vector2(4.98051, 2.9843516)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="RedTruck/HazardMeshes" unique_id=1614912346]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(-15.001617, 44.979813)
+scale = Vector2(6.0087643, 1.0334065)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="RedTruck/HazardMeshes" unique_id=943452126]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(14.982056, 44.98906)
+scale = Vector2(6.0390906, 1.0468369)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="HazardLights" type="Node2D" parent="RedTruck" unique_id=601140327]
+
+[node name="PointLight2D" type="PointLight2D" parent="RedTruck/HazardLights" unique_id=1972160545]
+position = Vector2(-12.731958, -43.850487)
+scale = Vector2(0.28257006, 0.217765)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D2" type="PointLight2D" parent="RedTruck/HazardLights" unique_id=2074492263]
+position = Vector2(12.720989, -43.902973)
+scale = Vector2(0.2669742, 0.2057459)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D3" type="PointLight2D" parent="RedTruck/HazardLights" unique_id=2027768440]
+position = Vector2(15.001075, 44.639465)
+scale = Vector2(0.31204242, 0.1834509)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D4" type="PointLight2D" parent="RedTruck/HazardLights" unique_id=992440770]
+position = Vector2(-15.014613, 45.013157)
+scale = Vector2(0.30089483, 0.17689717)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="RedTruck" unique_id=1380884023]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RedTruck/StaticBody2D" unique_id=1969725926]
+position = Vector2(0.056915283, 0.60095215)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_pthuy")
+
+[node name="OrangeCar" type="Sprite2D" parent="." unique_id=674001583]
+texture_filter = 1
+position = Vector2(854, 369)
+rotation = -1.3368775
+scale = Vector2(1.665, 1.665)
+texture = ExtResource("3_42flm")
+hframes = 5
+vframes = 3
+frame = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OrangeCar" unique_id=1222670358]
+libraries/ = SubResource("AnimationLibrary_4h6k1")
+autoplay = &"blinking"
+
+[node name="HazardMeshes" type="Node2D" parent="OrangeCar" unique_id=895476725]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="OrangeCar/HazardMeshes" unique_id=1097255069]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(-12.4765625, -43.072006)
+scale = Vector2(5.11565, 3.0374258)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="OrangeCar/HazardMeshes" unique_id=898484822]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(12.4888, -43.000305)
+scale = Vector2(4.98051, 2.9843516)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="OrangeCar/HazardMeshes" unique_id=481947449]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(-15.001617, 44.979813)
+scale = Vector2(6.0087643, 1.0334065)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="OrangeCar/HazardMeshes" unique_id=1450234360]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(14.982056, 44.98906)
+scale = Vector2(6.0390906, 1.0468369)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="HazardLights" type="Node2D" parent="OrangeCar" unique_id=485839772]
+
+[node name="PointLight2D" type="PointLight2D" parent="OrangeCar/HazardLights" unique_id=1908508863]
+position = Vector2(-12.731958, -43.850487)
+scale = Vector2(0.28257006, 0.217765)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D2" type="PointLight2D" parent="OrangeCar/HazardLights" unique_id=574349492]
+position = Vector2(12.720989, -43.902973)
+scale = Vector2(0.2669742, 0.2057459)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D3" type="PointLight2D" parent="OrangeCar/HazardLights" unique_id=974725668]
+position = Vector2(15.001075, 44.639465)
+scale = Vector2(0.31204242, 0.1834509)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D4" type="PointLight2D" parent="OrangeCar/HazardLights" unique_id=541515987]
+position = Vector2(-15.014613, 45.013157)
+scale = Vector2(0.30089483, 0.17689717)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="OrangeCar" unique_id=26462228]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OrangeCar/StaticBody2D" unique_id=186024992]
+position = Vector2(-0.44504547, -0.5008545)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_oryxb")
+
+[node name="RedCar2" type="Sprite2D" parent="." unique_id=306335793]
+texture_filter = 1
+position = Vector2(645.99994, 103.999985)
+rotation = -1.6557239
+scale = Vector2(1.665, 1.665)
+texture = ExtResource("3_42flm")
+hframes = 5
+vframes = 3
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RedCar2" unique_id=139105109]
+libraries/ = SubResource("AnimationLibrary_4h6k1")
+autoplay = &"blinking"
+
+[node name="HazardMeshes" type="Node2D" parent="RedCar2" unique_id=1542599569]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="RedCar2/HazardMeshes" unique_id=1521345056]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(-17.513126, -37.30211)
+rotation = -0.79459137
+scale = Vector2(4.6446085, 2.2399485)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="RedCar2/HazardMeshes" unique_id=437663358]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(16.615814, -37.035877)
+rotation = 0.64008677
+scale = Vector2(5.569828, 2.9537408)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="RedCar2/HazardMeshes" unique_id=202763166]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(-16.603037, 39.148876)
+scale = Vector2(2.3529956, 2.3452537)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="RedCar2/HazardMeshes" unique_id=1093695903]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(15.220868, 39.13147)
+scale = Vector2(2.4346836, 2.2578077)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="HazardLights" type="Node2D" parent="RedCar2" unique_id=143600804]
+
+[node name="PointLight2D" type="PointLight2D" parent="RedCar2/HazardLights" unique_id=629369601]
+position = Vector2(-12.731958, -43.850487)
+scale = Vector2(0.28257006, 0.217765)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D2" type="PointLight2D" parent="RedCar2/HazardLights" unique_id=136999584]
+position = Vector2(12.720989, -43.902973)
+scale = Vector2(0.2669742, 0.2057459)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D3" type="PointLight2D" parent="RedCar2/HazardLights" unique_id=703248332]
+position = Vector2(15.001075, 44.639465)
+scale = Vector2(0.31204242, 0.1834509)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D4" type="PointLight2D" parent="RedCar2/HazardLights" unique_id=544155388]
+position = Vector2(-15.014613, 45.013157)
+scale = Vector2(0.30089483, 0.17689717)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="RedCar2" unique_id=1300702418]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RedCar2/StaticBody2D" unique_id=1185924058]
+position = Vector2(-0.2802124, 0.5664673)
+scale = Vector2(0.9999994, 0.9999994)
+shape = SubResource("RectangleShape2D_gi3qg")
+
+[node name="Cab" type="Sprite2D" parent="." unique_id=931868620]
+texture_filter = 1
+position = Vector2(425.00003, 124)
+rotation = -1.3949443
+scale = Vector2(1.665, 1.665)
+texture = ExtResource("3_42flm")
+hframes = 5
+vframes = 3
+frame = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cab" unique_id=1828068600]
+libraries/ = SubResource("AnimationLibrary_4h6k1")
+autoplay = &"blinking"
+
+[node name="HazardMeshes" type="Node2D" parent="Cab" unique_id=1993219813]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Cab/HazardMeshes" unique_id=1926986650]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(-12.4765625, -43.072006)
+scale = Vector2(5.11565, 3.0374258)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="Cab/HazardMeshes" unique_id=1810888107]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(12.4888, -43.000305)
+scale = Vector2(4.98051, 2.9843516)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D3" type="MeshInstance2D" parent="Cab/HazardMeshes" unique_id=1544223937]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(-15.001617, 44.979813)
+scale = Vector2(6.0087643, 1.0334065)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="MeshInstance2D4" type="MeshInstance2D" parent="Cab/HazardMeshes" unique_id=298737335]
+modulate = Color(1, 0.40600002, 0.00999999, 1)
+position = Vector2(14.982056, 44.98906)
+scale = Vector2(6.0390906, 1.0468369)
+mesh = SubResource("QuadMesh_42flm")
+
+[node name="HazardLights" type="Node2D" parent="Cab" unique_id=575856247]
+
+[node name="PointLight2D" type="PointLight2D" parent="Cab/HazardLights" unique_id=2021258841]
+position = Vector2(-12.731958, -43.850487)
+scale = Vector2(0.28257006, 0.217765)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Cab/HazardLights" unique_id=1295588114]
+position = Vector2(12.720989, -43.902973)
+scale = Vector2(0.2669742, 0.2057459)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Cab/HazardLights" unique_id=886683199]
+position = Vector2(15.001075, 44.639465)
+scale = Vector2(0.31204242, 0.1834509)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Cab/HazardLights" unique_id=1406956353]
+position = Vector2(-15.014613, 45.013157)
+scale = Vector2(0.30089483, 0.17689717)
+color = Color(1, 0.56078434, 0.011764706, 1)
+texture = ExtResource("4_0c0jg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Cab" unique_id=305398136]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cab/StaticBody2D" unique_id=385362037]
+position = Vector2(-0.29566574, -0.06600952)
+shape = SubResource("RectangleShape2D_ik8ov")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=449562141]
+color = Color(0.71129596, 0.7112969, 0.7112961, 1)
+
+[node name="PointLight2D4" type="PointLight2D" parent="." unique_id=650108085]
+position = Vector2(536, 822)
+scale = Vector2(4.455, 4.437)
+energy = 0.3
+texture = ExtResource("5_4h6k1")
+
+[node name="PointLight2D5" type="PointLight2D" parent="." unique_id=2083094478]
+position = Vector2(790, 830)
+scale = Vector2(4.455, 4.437)
+energy = 0.3
+texture = ExtResource("5_4h6k1")
