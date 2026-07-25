@@ -8,16 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dbhnxv2wgvich" path="res://kenney_top-down-shooter/PNG/weapon_gun.png" id="6_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://cvbg5tnfj4qb7" path="res://kenney_top-down-shooter/PNG/Survivor 1/survivor1_reload.png" id="7_3smsa"]
 [ext_resource type="Texture2D" uid="uid://dqpkyqlmsshoa" path="res://kenney_top-down-shooter/PNG/Survivor 1/survivor1_stand.png" id="8_8erm5"]
-[ext_resource type="Texture2D" uid="uid://cwgjser27w6q4" path="res://kenney_top-down-shooter/PNG/Tiles/Pistol.png" id="9_7dp3o"]
 [ext_resource type="Texture2D" uid="uid://cj5culvuoqnec" path="res://kenney_top-down-shooter/PNG/Survivor 1/survivor1_hold.png" id="9_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://cds7my60s28dt" path="res://kenney_top-down-shooter/PNG/Tiles/tile_241.png" id="9_tx1dd"]
-[ext_resource type="Texture2D" uid="uid://ycw3yiyoroeq" path="res://kenney_top-down-shooter/PNG/Tiles/Shotgun.png" id="10_h4iuc"]
-[ext_resource type="Texture2D" uid="uid://c3vmynijwb365" path="res://kenney_top-down-shooter/PNG/Tiles/MachineGun.png" id="11_fd4e3"]
 [ext_resource type="Texture2D" uid="uid://v6h6utueejs4" path="res://kenney_top-down-shooter/Spritesheet/KnifeSlashEffect.png" id="11_gymyn"]
-[ext_resource type="FontFile" uid="uid://byijq07app1jm" path="res://SuperchargeSemiStraight-lgnvD.otf" id="12_h4iuc"]
-[ext_resource type="Texture2D" uid="uid://fh6gfv63grl2" path="res://kenney_top-down-shooter/PNG/Tiles/MachineGunWhite.png" id="13_qqcod"]
-[ext_resource type="Texture2D" uid="uid://cb716sx0ksnxg" path="res://kenney_top-down-shooter/PNG/Tiles/ShotgunWhite.png" id="14_igrcy"]
-[ext_resource type="Texture2D" uid="uid://cluwdyabxfnr6" path="res://kenney_top-down-shooter/PNG/Tiles/PistolWhite.png" id="15_igrcy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 21.0
@@ -25,42 +18,6 @@ radius = 21.0
 [sub_resource type="Gradient" id="Gradient_cvnsp"]
 offsets = PackedFloat32Array(0, 0.5344828, 1)
 colors = PackedColorArray(0.5647059, 0.5647059, 0.5647059, 0.73333335, 0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6n3p"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.48235294, 0.48235294, 0.48235294, 0.67058825)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igrcy"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.19461778, 0.3532687, 0.54562193, 0.7529412)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fs7ks"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.8627451, 0.84313726, 0.42352942, 0.7529412)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 6
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gymyn"]
 radius = 19.026293
@@ -198,7 +155,7 @@ _data = {
 &"knifeattack": SubResource("Animation_ukyrk")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=821701636 node_paths=PackedStringArray("aim_line", "muzzle") groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1788854571 node_paths=PackedStringArray("aim_line", "muzzle") groups=["player"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_cvnsp")
@@ -284,85 +241,12 @@ texture = ExtResource("7_3smsa")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=713599226]
 
-[node name="Panel" type="Panel" parent="UI" unique_id=240543027]
-offset_left = 917.0
-offset_top = 304.0
-offset_right = 1121.0
-offset_bottom = 488.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_l6n3p")
-
-[node name="Pistol" type="Sprite2D" parent="UI/Panel" unique_id=560740857]
-texture_filter = 1
-position = Vector2(92, 41.99997)
-scale = Vector2(3.75, 3.75)
-texture = ExtResource("9_7dp3o")
-
-[node name="Shotgun" type="Sprite2D" parent="UI/Panel" unique_id=2115216021]
-texture_filter = 1
-position = Vector2(85, 90.99994)
-scale = Vector2(3.75, 3.75)
-texture = ExtResource("10_h4iuc")
-
-[node name="MachineGun" type="Sprite2D" parent="UI/Panel" unique_id=821631725]
-texture_filter = 1
-position = Vector2(85, 144.99994)
-scale = Vector2(3.75, 3.75)
-texture = ExtResource("11_fd4e3")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel" unique_id=1692456571]
-layout_mode = 0
-offset_left = 143.0
-offset_top = 11.9999695
-offset_right = 200.0
-offset_bottom = 149.99997
-theme_override_constants/separation = 27
-
-[node name="PistolAmmoLabel" type="Label" parent="UI/Panel/VBoxContainer" unique_id=1753471703]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("12_h4iuc")
-theme_override_font_sizes/font_size = 20
-text = "7/7"
-
-[node name="ShotgunAmmoLabel" type="Label" parent="UI/Panel/VBoxContainer" unique_id=404384660]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("12_h4iuc")
-theme_override_font_sizes/font_size = 20
-text = "2/2"
-
-[node name="MachineGunAmmoLabel" type="Label" parent="UI/Panel/VBoxContainer" unique_id=1245397644]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("12_h4iuc")
-theme_override_font_sizes/font_size = 16
-text = "30/30"
-
-[node name="MachineGunWhiteUI" type="Sprite2D" parent="UI/Panel" unique_id=2112181546]
-texture_filter = 1
-position = Vector2(81.00006, 141)
-scale = Vector2(3.75, 3.75)
-texture = ExtResource("13_qqcod")
-
-[node name="ShotgunWhiteUI" type="Sprite2D" parent="UI/Panel" unique_id=228255538]
-texture_filter = 1
-position = Vector2(81, 86.99997)
-scale = Vector2(3.75, 3.75)
-texture = ExtResource("14_igrcy")
-
-[node name="PistolWhiteUI" type="Sprite2D" parent="UI/Panel" unique_id=1944973718]
-texture_filter = 1
-position = Vector2(88, 38)
-scale = Vector2(3.75, 3.75)
-texture = ExtResource("15_igrcy")
-
-[node name="ReloadBar" type="ProgressBar" parent="UI/Panel" unique_id=1251989343]
-layout_mode = 0
-offset_left = 27.799988
-offset_top = 165.0
-offset_right = 170.0
-offset_bottom = 174.0
-theme_override_styles/background = SubResource("StyleBoxFlat_igrcy")
-theme_override_styles/fill = SubResource("StyleBoxFlat_fs7ks")
-value = 8.85
-show_percentage = false
+[node name="AmmoLabel" type="Label" parent="UI" unique_id=1753471703]
+offset_left = 987.0
+offset_top = 391.0
+offset_right = 1074.0
+offset_bottom = 414.0
+text = "PISTOL: 7/7"
 
 [node name="MeleeArea" type="Area2D" parent="." unique_id=2002762510]
 visible = false

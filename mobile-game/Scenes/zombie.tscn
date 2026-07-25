@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bulehbd1pgpbj"]
+
+[ext_resource type="Texture2D" uid="uid://cjrrpiwjm5lhb" path="res://kenney_top-down-shooter/PNG/Zombie 1/zoimbie1_hold.png" id="1_h3kin"]
+[ext_resource type="Script" uid="uid://c6tw2rakil8lg" path="res://zombie.gd" id="1_n70j1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n70j1"]
+size = Vector2(30, 43)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n70j1"]
+radius = 40.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n70j1"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.7490196)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iyl7r"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[node name="Zombie" type="CharacterBody2D" unique_id=1972323900]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_n70j1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=834592700]
+texture_filter = 1
+texture = ExtResource("1_h3kin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=648602553]
+position = Vector2(2, -0.5)
+shape = SubResource("RectangleShape2D_n70j1")
+
+[node name="AvoidanceArea" type="Area2D" parent="." unique_id=1564670500]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidanceArea" unique_id=242905472]
+shape = SubResource("CircleShape2D_n70j1")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=2143937247]
+offset_left = -47.0
+offset_top = -3.0
+offset_right = 1.0
+offset_bottom = 3.0
+rotation = -1.5707964
+pivot_offset = Vector2(24, 3)
+theme_override_styles/background = SubResource("StyleBoxFlat_n70j1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_iyl7r")
+max_value = 12.0
+value = 2.0
+show_percentage = false

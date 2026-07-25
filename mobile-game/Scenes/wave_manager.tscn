@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bstcgpx5367fj"]
+
+[ext_resource type="Script" uid="uid://cvpxw1sdtmg5s" path="res://Scripts/wave_manager.gd" id="1_51qnr"]
+[ext_resource type="PackedScene" uid="uid://bulehbd1pgpbj" path="res://Scenes/zombie.tscn" id="2_j7jtk"]
+
+[node name="WaveManager" type="Node2D" unique_id=1626999926]
+script = ExtResource("1_51qnr")
+enemy_scene = ExtResource("2_j7jtk")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=554812135]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1980321483]
+
+[node name="WaveCounterLabel" type="Label" parent="CanvasLayer" unique_id=747709323]
+offset_left = 418.0
+offset_top = 16.0
+offset_right = 482.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(1, 0.39607844, 0, 1)
+theme_override_constants/outline_size = 17
+theme_override_font_sizes/font_size = 48
+text = "Wave: "
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

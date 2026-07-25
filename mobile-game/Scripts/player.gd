@@ -11,7 +11,22 @@ enum GunType { PISTOL, SHOTGUN, MACHINE_GUN, KNIFE}
 @onready var pistol_sprite = $PistolSprite
 @onready var machine_gun_sprite = $MachineGunSprite
 @onready var shotgun_sprite = $ShotgunSprite
-@onready var ammo_label = $UI/AmmoLabel
+@onready var reload_bar = $UI/Panel/ReloadBar
+
+@onready var pistol_ammo_label = $UI/Panel/VBoxContainer/PistolAmmoLabel
+@onready var shotgun_ammo_label = $UI/Panel/VBoxContainer/ShotgunAmmoLabel
+@onready var machine_gun_ammo_label = $UI/Panel/VBoxContainer/MachineGunAmmoLabel
+
+
+@onready var pistol_ui = $UI/Panel/Pistol
+@onready var shotgun_ui = $UI/Panel/Shotgun
+@onready var machine_gun_ui = $UI/Panel/MachineGun
+
+@onready var machine_gun_white_ui = $UI/Panel/MachineGunWhiteUI
+@onready var shotgun_white_ui = $UI/Panel/ShotgunWhiteUI
+@onready var pistol_white_ui = $UI/Panel/PistolWhiteUI
+
+var inactive_gun = Color(0.3, 0.3,0.3, 0.6)
 
 @onready var machine_gun_reload = $MachineGunReload
 @onready var pistol_gun_reload = $PistolGunReload
@@ -31,6 +46,7 @@ var current_ammo: int = 7
 var is_reloading: bool = false
 var is_aiming = false
 var machine_gun_cooldown: bool = false
+var is_knifing: bool = false
 
 func _ready():
 	update_weapon_sprites()
@@ -46,7 +62,7 @@ func _physics_process(delta: float):
 	if Input.is_key_pressed(KEY_1): switch_weapon(GunType.PISTOL)
 	if Input.is_key_pressed(KEY_2): switch_weapon(GunType.SHOTGUN)
 	if Input.is_key_pressed(KEY_3): switch_weapon(GunType.MACHINE_GUN)
-	if Input.is_key_pressed(KEY_Q): switch_weapon(GunType.KNIFE)
+	if Input.is_action_just_pressed("knife") and not is_knifing: start_melee_attack()
 
 	if Input.is_key_pressed(KEY_R) and not is_reloading: start_reload()
 
@@ -95,8 +111,6 @@ func shoot_current_gun() -> void:
 		machine_gun_cooldown = true
 		get_tree().create_timer(0.1).timeout.connect(func(): machine_gun_cooldown = false)
 	
-
-		
 	var global_mouse = get_global_mouse_position()
 	var raw_direction = (global_mouse - global_position).normalized()
 
@@ -119,12 +133,20 @@ func shoot_current_gun() -> void:
 		get_tree().current_scene.add_child(bullet)
 
 func start_reload() -> void:
+	reload_bar.value = 0
+	reload_bar.visible = true
+	var tween = create_tween()
+	
+	var reload_time = gun_stats[current_gun]["reload_time"]
+	
+	tween.tween_property(reload_bar, "value", 100.0, reload_time)
+	
 	is_reloading = true
 	print("Reloading weapon...")
 	update_weapon_sprites()
 	update_ammo_ui()
-	
-	await get_tree().create_timer(gun_stats[current_gun]["reload_time"]).timeout
+
+	await get_tree().create_timer(reload_time).timeout
 
 	gun_stats[current_gun]["current_ammo"] = gun_stats[current_gun]["ammo_max"]
 	is_reloading = false
@@ -133,6 +155,7 @@ func start_reload() -> void:
 	update_ammo_ui()
 
 	print("Reloading complete! Ammo: ", current_ammo)
+	reload_bar.hide()
 	
 
 func switch_weapon(new_gun: GunType) -> void:
@@ -144,7 +167,6 @@ func switch_weapon(new_gun: GunType) -> void:
 	update_ammo_ui()
 	print("Switched to: ", GunType.keys()[new_gun])
 
-
 func update_weapon_sprites():
 	pistol_sprite.visible = false
 	shotgun_sprite.visible = false
@@ -153,47 +175,73 @@ func update_weapon_sprites():
 	shotgun_reload.visible = false
 	machine_gun_reload.visible = false
 	melee_area.visible = false
-	
-	
+	pistol_ui.modulate = inactive_gun
+	shotgun_ui.modulate = inactive_gun
+	machine_gun_ui.modulate = inactive_gun
+	machine_gun_white_ui.visible = false
+	shotgun_white_ui.visible = false
+	pistol_white_ui.visible = false
+	reload_bar.visible = false
+
 	match current_gun:
 		GunType.PISTOL:
+			pistol_white_ui.visible = true
 			if is_reloading:
 				pistol_gun_reload.visible = true
+				reload_bar.visible = true
 			else:
 				pistol_sprite.visible = true
 		GunType.SHOTGUN:
+			shotgun_white_ui.visible = true
 			if is_reloading:
 				shotgun_reload.visible = true
+				reload_bar.visible = true
 			else:
 				shotgun_sprite.visible = true
 		GunType.MACHINE_GUN:
+			machine_gun_white_ui.visible = true
 			if is_reloading:
 				machine_gun_reload.visible = true
+				reload_bar.visible = true
 			else:
 				machine_gun_sprite.visible = true
 		GunType.KNIFE:
 			melee_area.visible = true
+			
 
 func update_ammo_ui():
-	if ammo_label:
-		if is_reloading:
-			ammo_label.text = "RELOADING..."
-		else:
-			var weapon_name = GunType.keys()[current_gun]
-			var current_bullets = gun_stats[current_gun]["current_ammo"]
-			var max_capacity = gun_stats[current_gun]["ammo_max"]
-			ammo_label.text = weapon_name + ": " + str(current_bullets) + " / " + str(max_capacity)
+	if gun_stats.has(GunType.PISTOL):
+		var p_cur = gun_stats[GunType.PISTOL]["current_ammo"]
+		var p_max = gun_stats[GunType.PISTOL]["ammo_max"]
+		pistol_ammo_label.text = str(p_cur) + "/" + str(p_max)
+	if gun_stats.has(GunType.SHOTGUN):
+		var s_cur = gun_stats[GunType.SHOTGUN]["current_ammo"]
+		var s_max = gun_stats[GunType.SHOTGUN]["ammo_max"]
+		shotgun_ammo_label.text = str(s_cur) + "/" + str(s_max)
+	if gun_stats.has(GunType.MACHINE_GUN):
+		var m_cur = gun_stats[GunType.MACHINE_GUN]["current_ammo"]
+		var m_max = gun_stats[GunType.MACHINE_GUN]["ammo_max"]
+		machine_gun_ammo_label.text = str(m_cur) + "/" + str(m_max)
+		
 
 func start_melee_attack():
-	is_reloading = true
+	if is_knifing:
+		return
+	is_knifing = true
+	var previous_gun = current_gun
+	
+	current_gun = GunType.KNIFE
+	update_weapon_sprites()
 	$AnimationPlayer.play("knifeattack")
 	var targets = melee_area.get_overlapping_bodies()
 	for target in targets:
 		if target.is_in_group("enemies"):
 			if target.has_method("take_damage"):
-				target.take_damage(2)
+				target.take_damage(3)
 	
 	await $AnimationPlayer.animation_finished
 	
-	is_reloading = false
+	is_knifing = false
 	
+	current_gun = previous_gun
+	update_weapon_sprites()

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oduel"]
 size = Vector2(18, 10)
 
-[node name="Bullet" type="Area2D" unique_id=258480638]
+[node name="Bullet" type="Area2D" unique_id=258480638 groups=["player"]]
 script = ExtResource("1_oduel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1034572625]
@@ -20,4 +20,5 @@ texture = ExtResource("1_xjght")
 [node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="." unique_id=836208721]
 rect = Rect2(-10, -5, 20, 10)
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
