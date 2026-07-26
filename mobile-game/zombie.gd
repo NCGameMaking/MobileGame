@@ -1,10 +1,14 @@
 extends CharacterBody2D
 
-@export var speed: float = 150.0
+@export var speed: float = 130.0
 @export var health: int = 12
 @export var max_health:int = 12
 @onready var avoidance_area = $AvoidanceArea
 @onready var health_bar = $HealthBar
+
+@export var attack_cooldown: float = 1.0
+var player_in_range: CharacterBody2D=null
+var is_attacking: bool = false
 
 var player: CharacterBody2D = null
 var sb: StyleBoxFlat
@@ -54,9 +58,9 @@ func take_damage(amount: int):
 	
 	var health_pt: float = float(health)
 	
-	if health_pt >= 6:
+	if health_pt >= 9:
 		sb.bg_color = Color(0,1,0)
-	elif health_pt >=3:
+	elif health_pt >=6:
 		sb.bg_color = Color(1,0.65,0)
 	else:
 		sb.bg_color = Color(1,0,0)
@@ -68,4 +72,26 @@ func take_damage(amount: int):
 		queue_free()
 		print("zombie dead")
 
-	
+func _on_attack_area_body_entered(body):
+	if body.is_in_group("player"):
+		player_in_range = body
+		if not is_attacking:
+			attack_loop()
+			print("hurt_player")
+
+
+func _on_attack_area_body_exited(body):
+	if body == player_in_range:
+		player_in_range = null
+
+func attack_loop():
+	is_attacking = true
+	while player_in_range != null and is_instance_valid(player_in_range):
+		if is_instance_valid(player_in_range) and player_in_range.has_method("take_damage"):
+			player_in_range.take_damage(10)
+		
+		if is_inside_tree():
+			await get_tree().create_timer(attack_cooldown).timeout
+		else:
+			return
+	is_attacking = false

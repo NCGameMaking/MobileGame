@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://demxxnbsrga5s"]
+
+[ext_resource type="Texture2D" uid="uid://balax1xx11254" path="res://kenney_top-down-shooter/PNG/Tiles/three-gold-coins.png" id="1_2qo34"]
+[ext_resource type="Script" uid="uid://b4h5gw1fgt5nx" path="res://Scripts/coin.gd" id="1_jgi06"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgi06"]
+size = Vector2(26, 26)
+
+[node name="Coin" type="Area2D" unique_id=1230685279]
+script = ExtResource("1_jgi06")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=110413579]
+texture_filter = 1
+texture = ExtResource("1_2qo34")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=124969070]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_jgi06")

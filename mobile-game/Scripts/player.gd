@@ -5,6 +5,9 @@ enum GunType { PISTOL, SHOTGUN, MACHINE_GUN, KNIFE}
 @export var speed: float = 300.0
 @export var bullet_scene : PackedScene
 
+@export var max_health: int = 100.0
+var current_health: int
+
 @export var aim_line: Line2D
 @export var muzzle: Marker2D
 
@@ -17,15 +20,22 @@ enum GunType { PISTOL, SHOTGUN, MACHINE_GUN, KNIFE}
 @onready var shotgun_ammo_label = $UI/Panel/VBoxContainer/ShotgunAmmoLabel
 @onready var machine_gun_ammo_label = $UI/Panel/VBoxContainer/MachineGunAmmoLabel
 
+@onready var scene_filter = $SceneFilter
+@onready var death_ui = $DeathUI
+@onready var camera = $Camera2D
 
 @onready var pistol_ui = $UI/Panel/Pistol
 @onready var shotgun_ui = $UI/Panel/Shotgun
 @onready var machine_gun_ui = $UI/Panel/MachineGun
 
+@onready var day_count_label = $DeathUI/DeathPanel/DayCountLabel
+@onready var wave_node = $"../WaveManager"
+
 @onready var machine_gun_white_ui = $UI/Panel/MachineGunWhiteUI
 @onready var shotgun_white_ui = $UI/Panel/ShotgunWhiteUI
 @onready var pistol_white_ui = $UI/Panel/PistolWhiteUI
 
+@onready var healthbar = $UI/Panel/Healthbar
 var inactive_gun = Color(0.3, 0.3,0.3, 0.6)
 
 @onready var machine_gun_reload = $MachineGunReload
@@ -49,6 +59,10 @@ var machine_gun_cooldown: bool = false
 var is_knifing: bool = false
 
 func _ready():
+	$UI/Panel.show()
+	$".".modulate = Color(1,1,1,1)
+	current_health = max_health
+	update_health_ui()
 	update_weapon_sprites()
 	update_ammo_ui()
 
@@ -245,3 +259,47 @@ func start_melee_attack():
 	
 	current_gun = previous_gun
 	update_weapon_sprites()
+
+func take_damage(amount: int):
+	$AnimationPlayer.play("hurt")
+	current_health -= amount
+	current_health = clamp(current_health,0,max_health)
+	
+	update_health_ui()
+	
+	if current_health <= 0:
+		die()
+	
+func update_health_ui():
+	if healthbar:
+		healthbar.value = current_health
+		
+func die():
+	print("PLayer ded")
+	set_physics_process(false)
+	$CollisionShape2D.set_deferred("disabled", true)
+	
+	var tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property(camera, "zoom", Vector2(0.5,0.5), 1.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	
+	if scene_filter:
+		tween.tween_property(scene_filter, "color", Color(0.4, 0.4,0.5), 1.5)
+	await tween.finished
+	
+	var wave_node = $"../WaveManager"
+	
+	print("DEBUG: wave_node is -> ", wave_node)
+	
+	var completed_waves = 0
+	if wave_node != null:
+		completed_waves = max(0, wave_node.current_wave - 1)
+	day_count_label.text = "You survived for %d waves" % completed_waves
+	$UI/Panel.hide()
+	$AnimationPlayer.play("death")
+
+
+func _on_retry_button_pressed():
+	get_tree().reload_current_scene()
+
+func _on_quit_button_pressed():
+	get_tree().quit()

@@ -18,6 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://fh6gfv63grl2" path="res://kenney_top-down-shooter/PNG/Tiles/MachineGunWhite.png" id="13_qqcod"]
 [ext_resource type="Texture2D" uid="uid://cb716sx0ksnxg" path="res://kenney_top-down-shooter/PNG/Tiles/ShotgunWhite.png" id="14_igrcy"]
 [ext_resource type="Texture2D" uid="uid://cluwdyabxfnr6" path="res://kenney_top-down-shooter/PNG/Tiles/PistolWhite.png" id="15_igrcy"]
+[ext_resource type="Texture2D" uid="uid://cg4elpkrtc568" path="res://HealthbarUnder.png" id="19_olqyp"]
+[ext_resource type="Texture2D" uid="uid://byk1mpmcvlvr" path="res://HealthbarOver.png" id="20_wpjfl"]
+[ext_resource type="Texture2D" uid="uid://cmpr84j7ig301" path="res://HealthbarFill1.png" id="21_olqyp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 21.0
@@ -127,6 +130,62 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.6039216)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DeathUI/DeathPanel:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(264.274, 1000)]
+}
+
+[sub_resource type="Animation" id="Animation_wpjfl"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathUI/DeathPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(264.274, 1000), Vector2(264.27368, 56)]
+}
+
+[sub_resource type="Animation" id="Animation_olqyp"]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 0.6039216), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ukyrk"]
 resource_name = "knifeattack"
@@ -195,10 +254,49 @@ tracks/4/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7dp3o"]
 _data = {
 &"RESET": SubResource("Animation_pu2lt"),
+&"death": SubResource("Animation_wpjfl"),
+&"hurt": SubResource("Animation_olqyp"),
 &"knifeattack": SubResource("Animation_ukyrk")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olqyp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wpjfl"]
+bg_color = Color(0.6, 0.3529412, 0.2, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 10
+expand_margin_left = 5.0
+expand_margin_bottom = 8.0
+shadow_color = Color(0, 0, 0, 0.67058825)
+shadow_size = 12
+shadow_offset = Vector2(-5.075, 3.78)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi64h"]
+bg_color = Color(0.6, 0.3529412, 0.2, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.67058825)
+shadow_size = 12
+shadow_offset = Vector2(-5.075, 3.78)
+
 [node name="Player" type="CharacterBody2D" unique_id=821701636 node_paths=PackedStringArray("aim_line", "muzzle") groups=["player"]]
+modulate = Color(1, 0, 0, 0.6039216)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_cvnsp")
@@ -364,6 +462,22 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_fs7ks")
 value = 8.85
 show_percentage = false
 
+[node name="Healthbar" type="TextureProgressBar" parent="UI/Panel" unique_id=1658959907 groups=["player"]]
+texture_filter = 1
+layout_mode = 0
+offset_left = -917.0
+offset_top = -304.0
+offset_right = -821.0
+offset_bottom = -264.0
+scale = Vector2(3.095, 3.095)
+value = 99.0
+stretch_margin_left = 37
+stretch_margin_right = 6
+texture_under = ExtResource("19_olqyp")
+texture_over = ExtResource("20_wpjfl")
+texture_progress = ExtResource("21_olqyp")
+texture_progress_offset = Vector2(34, 13)
+
 [node name="MeleeArea" type="Area2D" parent="." unique_id=2002762510]
 visible = false
 
@@ -395,3 +509,88 @@ texture = ExtResource("11_gymyn")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2074099661]
 libraries/ = SubResource("AnimationLibrary_7dp3o")
 autoplay = &"knifeattack"
+
+[node name="SceneFilter" type="CanvasModulate" parent="." unique_id=562788214]
+
+[node name="DeathUI" type="CanvasLayer" parent="." unique_id=310432521]
+
+[node name="DeathPanel" type="Panel" parent="DeathUI" unique_id=557203694]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -311.726
+offset_top = 676.0
+offset_right = 311.72662
+offset_bottom = 1211.9999
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_olqyp")
+
+[node name="Youdied" type="Label" parent="DeathUI/DeathPanel" unique_id=1059657422]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -194.0
+offset_top = 36.0
+offset_right = 195.0
+offset_bottom = 132.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8156863)
+theme_override_constants/shadow_offset_x = -6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("12_h4iuc")
+theme_override_font_sizes/font_size = 70
+text = "YOU DIED"
+
+[node name="DayCountLabel" type="Label" parent="DeathUI/DeathPanel" unique_id=661096421]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -154.0
+offset_top = 145.0
+offset_right = 159.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.65882355, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8156863)
+theme_override_constants/shadow_offset_x = -6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("12_h4iuc")
+theme_override_font_sizes/font_size = 20
+text = "You survived for x days"
+
+[node name="RetryButton" type="Button" parent="DeathUI/DeathPanel" unique_id=2091518493]
+layout_mode = 0
+offset_left = 195.72632
+offset_top = 234.0
+offset_right = 436.45264
+offset_bottom = 275.72632
+theme_override_fonts/font = ExtResource("12_h4iuc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wpjfl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wpjfl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bi64h")
+text = "Retry"
+
+[node name="QuitButton" type="Button" parent="DeathUI/DeathPanel" unique_id=1510054554]
+layout_mode = 0
+offset_left = 197.72632
+offset_top = 343.0
+offset_right = 438.45264
+offset_bottom = 384.72632
+theme_override_fonts/font = ExtResource("12_h4iuc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wpjfl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wpjfl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bi64h")
+text = "Quit"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=759481567]
+
+[connection signal="pressed" from="DeathUI/DeathPanel/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="DeathUI/DeathPanel/QuitButton" to="." method="_on_quit_button_pressed"]
