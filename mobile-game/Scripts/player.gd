@@ -303,7 +303,6 @@ func die():
 	var wave_node = $"../WaveManager"
 	
 	print("DEBUG: wave_node is -> ", wave_node)
-	queue_free()
 	var completed_waves = 0
 	if wave_node != null:
 		completed_waves = max(0, wave_node.current_wave - 1)
