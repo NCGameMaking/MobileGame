@@ -159,6 +159,16 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_b0tfs")
 theme_override_styles/hover = SubResource("StyleBoxFlat_375gp")
 text = "Play"
 
+[node name="HTPbutton" type="Button" parent="VBoxContainer" unique_id=519094713]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ghw46")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_b0tfs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b0tfs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_375gp")
+text = "HOw to play"
+
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1333852066]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -170,4 +180,5 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_375gp")
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HTPbutton" to="." method="_on_ht_pbutton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

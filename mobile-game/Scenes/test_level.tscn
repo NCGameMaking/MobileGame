@@ -31,7 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://cds7my60s28dt" path="res://kenney_top-down-shooter/PNG/Tiles/tile_241.png" id="29_eylua"]
 [ext_resource type="Texture2D" uid="uid://cj5culvuoqnec" path="res://kenney_top-down-shooter/PNG/Survivor 1/survivor1_hold.png" id="30_giktf"]
 [ext_resource type="Texture2D" uid="uid://v6h6utueejs4" path="res://kenney_top-down-shooter/Spritesheet/KnifeSlashEffect.png" id="31_y0hbx"]
-[ext_resource type="PackedScene" uid="uid://b4rf7008dilog" path="res://Scenes/work_bench.tscn" id="32_375gp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 21.0
@@ -619,10 +618,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_bi64h")
 text = "Quit"
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=759481567]
-
-[node name="WorkBench" parent="." unique_id=1835492371 instance=ExtResource("32_375gp")]
-position = Vector2(1366, 40)
-scale = Vector2(4, 4)
 
 [connection signal="pressed" from="Player/DeathUI/DeathPanel/RetryButton" to="Player" method="_on_retry_button_pressed"]
 [connection signal="pressed" from="Player/DeathUI/DeathPanel/QuitButton" to="Player" method="_on_quit_button_pressed"]
