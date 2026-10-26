@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://b4rf7008dilog"]
+
+[ext_resource type="Script" uid="uid://dblenfbuabvch" path="res://Scripts/work_bench.gd" id="1_esecm"]
+[ext_resource type="Texture2D" uid="uid://ckk8u3gucrhpd" path="res://kenney_top-down-shooter/PNG/Workbenches/WorkBenchTier1.png" id="1_tofpr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esecm"]
+size = Vector2(32, 28)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tofpr"]
+radius = 26.019224
+
+[node name="WorkBench" type="StaticBody2D" unique_id=1835492371]
+texture_filter = 1
+script = ExtResource("1_esecm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1799036303]
+position = Vector2(0, 0.5)
+scale = Vector2(1, 0.96428573)
+texture = ExtResource("1_tofpr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1527751301]
+shape = SubResource("RectangleShape2D_esecm")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1927142814]
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=611709950]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_tofpr")
+
+[node name="UIHUD" type="CanvasLayer" parent="." unique_id=1427643327]
+
+[node name="Control" type="Control" parent="UIHUD" unique_id=375578384]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -22.0
+offset_top = -72.0
+offset_right = 18.0
+offset_bottom = -32.0
+
+[node name="Prompt" type="Label" parent="UIHUD/Control" unique_id=1293909832]
+layout_mode = 0
+offset_left = -24.0
+offset_top = 40.0
+offset_right = 89.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 8
+text = "Press [E] to Open Workbench"
+
+[node name="UIUPGRADE" type="Label" parent="UIHUD/Control" unique_id=133605350]
+layout_mode = 0
+offset_left = -32.0
+offset_top = 7.0
+offset_right = 103.0
+offset_bottom = 30.0
+text = "UPGRADING UI..."
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

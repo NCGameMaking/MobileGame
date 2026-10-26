@@ -20,7 +20,6 @@ var current_health: int
 @onready var shotgun_ammo_label = $UI/Panel/VBoxContainer/ShotgunAmmoLabel
 @onready var machine_gun_ammo_label = $UI/Panel/VBoxContainer/MachineGunAmmoLabel
 
-@onready var scene_filter = $SceneFilter
 @onready var death_ui = $DeathUI
 @onready var camera = $Camera2D
 
@@ -105,9 +104,13 @@ func handle_test_aiming():
 
 func shoot_current_gun() -> void:
 	
+	if is_knifing or is_reloading:
+		return
+	
 	var stats = gun_stats[current_gun]
-
-	if not bullet_scene or current_ammo <= 0 or is_reloading:
+	
+	if stats["current_ammo"] <= 0:
+		start_reload()
 		return
 	
 	if stats["is_automatic"] and machine_gun_cooldown:
@@ -116,9 +119,10 @@ func shoot_current_gun() -> void:
 			start_melee_attack()
 			return
 	stats["current_ammo"] -= 1
+	current_ammo = stats["current_ammo"]
 	update_ammo_ui()
 	
-	if stats["current_ammo"] == 0:
+	if stats["current_ammo"] <= 0:
 		start_reload()
 
 	if stats["is_automatic"]:
@@ -239,7 +243,7 @@ func update_ammo_ui():
 		
 
 func start_melee_attack():
-	if is_knifing:
+	if is_reloading or is_knifing:
 		return
 	is_knifing = true
 	var previous_gun = current_gun
@@ -260,6 +264,8 @@ func start_melee_attack():
 	current_gun = previous_gun
 	update_weapon_sprites()
 
+var damage_tween:Tween
+
 func take_damage(amount: int):
 	$AnimationPlayer.play("hurt")
 	current_health -= amount
@@ -269,6 +275,16 @@ func take_damage(amount: int):
 	
 	if current_health <= 0:
 		die()
+		return
+	
+	flash_hurt_effect()
+
+func flash_hurt_effect():
+	if damage_tween and damage_tween.is_running():
+		damage_tween.kill()
+	damage_tween = create_tween()
+	modulate = Color(1,0.3,0.3)
+	damage_tween.tween_property(self,"modulate", Color.WHITE,0.2)
 	
 func update_health_ui():
 	if healthbar:
@@ -282,14 +298,12 @@ func die():
 	var tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(camera, "zoom", Vector2(0.5,0.5), 1.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	
-	if scene_filter:
-		tween.tween_property(scene_filter, "color", Color(0.4, 0.4,0.5), 1.5)
 	await tween.finished
 	
 	var wave_node = $"../WaveManager"
 	
 	print("DEBUG: wave_node is -> ", wave_node)
-	
+	queue_free()
 	var completed_waves = 0
 	if wave_node != null:
 		completed_waves = max(0, wave_node.current_wave - 1)
@@ -302,4 +316,4 @@ func _on_retry_button_pressed():
 	get_tree().reload_current_scene()
 
 func _on_quit_button_pressed():
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn")

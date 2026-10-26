@@ -19,8 +19,8 @@ func _process(delta):
 	pass
 
 func start_next_wave():
-	print("starting wave", current_wave)
-	$CanvasLayer/WaveCounterLabel.text = "Wave: " + str(current_wave)
+	print("Starting wave", current_wave)
+	$"../Player/UI/WaveCounterLabel".text = "Wave: " + str(current_wave)
 	
 	enemies_left_to_spawn = 5 + (current_wave + 2)
 	spawn_cooldown = max(0.4, 1.5-(current_wave * 0.1))
@@ -32,9 +32,11 @@ func _on_spawn_timer_timeout():
 	if enemies_left_to_spawn > 0:
 		spawn_enemy()
 		enemies_left_to_spawn -= 1
+		print(enemies_left_to_spawn)
 	else:
 		spawn_timer.stop()
 		check_wave_clear_loop()
+		
 
 func spawn_enemy():
 	if not enemy_scene : return
